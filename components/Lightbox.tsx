@@ -114,9 +114,19 @@ export default function Lightbox({ piece, onClose }: Props) {
         type="button"
         onClick={onClose}
         aria-label="Close"
-        className="absolute right-4 top-4 flex size-10 items-center justify-center rounded-full bg-marble/90 text-xl text-ink shadow-md transition-colors hover:bg-marble"
+        className="absolute right-6 top-6 flex size-10 items-center justify-center rounded-full bg-marble/90 text-ink shadow-md transition-colors hover:bg-marble sm:right-4 sm:top-4"
       >
-        ×
+        <svg
+          viewBox="0 0 24 24"
+          className="size-5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          aria-hidden
+        >
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
       </button>
     </div>
   );

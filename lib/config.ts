@@ -18,6 +18,6 @@ export const SITE = {
   // The single call to action: come see it in person. DM to get on the list.
   dm: {
     label: 'DM to come by',
-    href: 'https://instagram.com/etiennerobert',
+    href: 'https://instagram.com/thesoft.emperor',
   },
 } as const;
