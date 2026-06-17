@@ -5,7 +5,7 @@ import { SITE } from '../lib/config';
 export default function Hero() {
   const { name, date, blurb } = SITE.nextEvent;
   return (
-    <header className="px-6 pt-16 pb-12 text-center sm:pt-24 sm:pb-16">
+    <header className="px-6 pt-8 pb-12 text-center sm:pt-12 sm:pb-16 lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-center lg:px-10 lg:py-12">
       <h1 className="font-display text-5xl font-semibold tracking-tight text-walnut sm:text-7xl">
         {SITE.wordmark}
       </h1>
