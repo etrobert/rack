@@ -17,7 +17,7 @@ I've decided to host an event to do just that.
     // Human-readable; intentionally not a parsed Date — one source of truth.
     date: 'Saturday 18 July 2026',
     blurb:
-      'A week before Christopher Street Day, come by for my 30th birthday and get yourself sick new fit!',
+      'A week before Christopher Street Day, come by for my 30th birthday and get yourself a sick new fit!',
   },
 
   // The single call to action: come see it in person. DM to get on the list.
