@@ -78,10 +78,7 @@ function imgproxyUrl(fileUrl: string, width: number): string {
 }
 
 async function listDir(url: string): Promise<CaddyItem[]> {
-  const res = await fetch(url, {
-    headers: { Accept: 'application/json' },
-    cache: 'no-store',
-  });
+  const res = await fetch(url, { headers: { Accept: 'application/json' } });
   if (!res.ok) throw new Error(`Failed to list ${url}: ${res.status}`);
   return res.json();
 }
@@ -91,9 +88,7 @@ function normalizeStatus(raw: string | undefined): Status {
 }
 
 async function fetchPieceInfo(slug: string): Promise<PieceInfo> {
-  const res = await fetch(`${BASE_URL}${encodeURIComponent(slug)}/info.toml`, {
-    cache: 'no-store',
-  });
+  const res = await fetch(`${BASE_URL}${encodeURIComponent(slug)}/info.toml`);
   if (!res.ok)
     throw new Error(`Missing info.toml for "${slug}": ${res.status}`);
   return PieceInfoSchema.parse(parse(await res.text()));
