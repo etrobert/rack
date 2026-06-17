@@ -3,7 +3,11 @@
 
 export const SITE = {
   wordmark: 'The Rack',
-  tagline: 'A curated secondhand rail, browsed online — pulled in person.',
+  about:
+    'The Rack is a small, curated rail of secondhand clothing — pieces hunted ' +
+    'down one at a time and shot here at home, which doubles as the shop. ' +
+    'Browse the rail online, then come try things on in person: a bit of ' +
+    'styling, good company and a glass of something, over an unhurried afternoon.',
 
   // The next event. Date locked by 26 June (18 vs 19 July 2026); placeholder
   // until then — update this line and rebuild.

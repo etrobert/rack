@@ -49,7 +49,7 @@ export default function Lightbox({ piece, onClose }: Props) {
               alt={piece.name}
               decoding="async"
               onContextMenu={(e) => e.preventDefault()}
-              className="max-h-[60vh] w-full object-contain md:max-h-[85vh]"
+              className="block w-full"
             />
           )}
           {piece.photos.length > 1 && (
