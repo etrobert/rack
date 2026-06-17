@@ -41,6 +41,20 @@ Pieces are **not** in this repo. They're discovered at runtime from tower:
 To add or replace a piece: drop files on tower. To mark one sold:
 `vim info.toml`, set `status = "sold"`. Live instantly.
 
+### Cataloging with `rack-new`
+
+The manual drop is fine for one piece; for batches use the bundled helper. Give
+it a slug and some photos — it numbers the photos (first = cover), drops in a
+template `info.toml`, opens `$EDITOR` so you fill the fields, then rsyncs the
+folder to tower. One command per piece, no rebuild:
+
+```sh
+nix run .#rack-new -- linen-shirt ~/shoot/linen-shirt/*.jpg
+```
+
+Destination defaults to `tower:/srv/files/rack`; override with `RACK_HOST` /
+`RACK_PATH`. The dev shell (`nix develop`) puts `rack-new` on `$PATH` directly.
+
 ### `info.toml` schema
 
 ```toml

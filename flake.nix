@@ -31,6 +31,18 @@
               cp -r dist $out
             '';
           };
+
+          # Cataloging helper: scaffold a piece (photos + info.toml) and rsync it
+          # to tower. `nix run .#rack-new -- --name "…" photo.jpg …`.
+          rack-new = pkgs.writeShellApplication {
+            name = "rack-new";
+            runtimeInputs = with pkgs; [
+              coreutils
+              openssh
+              rsync
+            ];
+            text = builtins.readFile ./scripts/rack-new.sh;
+          };
         }
       );
 
@@ -80,7 +92,12 @@
           pkgs = nixpkgs.legacyPackages.${system};
         in
         {
-          default = pkgs.mkShell { packages = [ pkgs.nodejs_24 ]; };
+          default = pkgs.mkShell {
+            packages = [
+              pkgs.nodejs_24
+              self.packages.${system}.rack-new
+            ];
+          };
         }
       );
 
