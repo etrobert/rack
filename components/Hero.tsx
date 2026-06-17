@@ -13,7 +13,7 @@ export default function Hero() {
         {SITE.tagline}
       </p>
 
-      <div className="mx-auto mt-10 max-w-md rounded-lg border border-steel/30 bg-marble/70 px-6 py-5 shadow-[0_1px_0_theme(colors.marble)]">
+      <div className="mx-auto mt-10 max-w-md rounded-lg border border-steel/30 bg-marble/70 px-6 py-5">
         <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-steel-deep">
           next event
         </p>
