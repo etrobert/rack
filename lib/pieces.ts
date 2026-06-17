@@ -27,12 +27,13 @@ export type Status = 'available' | 'sold';
 export interface Piece {
   slug: string;
   name: string;
-  size: string;
-  price: string;
+  size?: string;
+  price?: string;
   status: Status;
-  blurb: string;
-  /** Card-sized resize of the lead photo. */
-  cover: string;
+  blurb?: string;
+  materials?: string;
+  /** Card-sized resize of the lead photo; undefined if the piece has no photos. */
+  cover?: string;
   /** Detail-sized resizes of every photo, lead first. */
   photos: string[];
 }
@@ -47,6 +48,7 @@ const PieceInfoSchema = z.object({
   price: z.string().optional(),
   status: z.string().optional(),
   blurb: z.string().optional(),
+  materials: z.string().optional(),
   /** Optional explicit lead photo filename; otherwise the first image wins. */
   cover: z.string().optional(),
   /** Optional sort key; lower sorts first. Falls back to slug order. */
@@ -111,11 +113,14 @@ async function fetchPiece(slug: string): Promise<Piece> {
   return {
     slug,
     name: info.name ?? slug,
-    size: info.size ?? '',
-    price: info.price ?? '',
+    size: info.size,
+    price: info.price,
     status: normalizeStatus(info.status),
-    blurb: info.blurb ?? '',
-    cover: ordered.length ? imgproxyUrl(fileUrl(ordered[0]), CARD_WIDTH) : '',
+    blurb: info.blurb,
+    materials: info.materials,
+    cover: ordered.length
+      ? imgproxyUrl(fileUrl(ordered[0]), CARD_WIDTH)
+      : undefined,
     photos: ordered.map((name) => imgproxyUrl(fileUrl(name), DETAIL_WIDTH)),
   };
 }

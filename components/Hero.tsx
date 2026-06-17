@@ -9,8 +9,8 @@ export default function Hero() {
       <h1 className="font-display text-5xl font-semibold tracking-tight text-walnut sm:text-7xl">
         {SITE.wordmark}
       </h1>
-      <p className="mx-auto mt-4 max-w-prose text-base leading-relaxed text-ink/70">
-        {SITE.about}
+      <p className="mx-auto mt-4 max-w-prose whitespace-pre-line text-base leading-relaxed text-ink/70">
+        {SITE.about.trim()}
       </p>
 
       <div className="mx-auto mt-10 max-w-md rounded-lg border border-steel/30 bg-marble/70 px-6 py-5">

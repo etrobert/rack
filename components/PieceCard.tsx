@@ -45,7 +45,7 @@ export default function PieceCard({ piece, onOpen }: Props) {
               </h2>
               {piece.size && (
                 <p className="mt-0.5 text-xs uppercase tracking-wider text-steel-deep">
-                  Size {piece.size}
+                  {piece.size}
                 </p>
               )}
             </div>

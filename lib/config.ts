@@ -3,11 +3,11 @@
 
 export const SITE = {
   wordmark: 'The Rack',
-  about:
-    'The Rack is a small, curated rail of secondhand clothing — pieces hunted ' +
-    'down one at a time and shot here at home, which doubles as the shop. ' +
-    'Browse the rail online, then come try things on in person: a bit of ' +
-    'styling, good company and a glass of something, over an unhurried afternoon.',
+  about: `
+I love having my friends over to try on clothes.
+When they come home with one it's even better.
+I've decided to host a regular event to do just that.
+`,
 
   // The next event. Date locked by 26 June (18 vs 19 July 2026); placeholder
   // until then — update this line and rebuild.
@@ -21,7 +21,7 @@ export const SITE = {
 
   // The single call to action: come see it in person. DM to get on the list.
   dm: {
-    label: 'DM to come by',
+    label: 'DM me',
     href: 'https://instagram.com/thesoft.emperor',
   },
 } as const;

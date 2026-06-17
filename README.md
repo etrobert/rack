@@ -44,15 +44,16 @@ To add or replace a piece: drop files on tower. To mark one sold:
 ### `info.toml` schema
 
 ```toml
-name   = "Cropped Linen Shirt"   # display name
-size   = "M"                      # free text (S / M / 48 / …)
-price  = "€35"                    # free text; shown as-is on the card
-status = "available"              # "available" | "sold"
-blurb  = "Boxy, sun-bleached, made for a hot CSD afternoon."  # one-line POV
+name      = "Cropped Linen Shirt"   # display name
+size      = "M"                      # free text (S / M / 48 / …)
+price     = "€35"                    # free text; shown as-is on the card
+status    = "available"              # "available" | "sold"
+blurb     = "Boxy, sun-bleached, made for a hot CSD afternoon."  # one-line POV
 
 # optional
-cover  = "front.jpg"   # which image leads; defaults to first alphabetically
-order  = 10            # lower sorts first (reserved; rail currently slug-ordered)
+materials = "100% linen"   # shown as a "Materials" section in the detail view
+cover     = "front.jpg"    # which image leads; defaults to first alphabetically
+order     = 10             # lower sorts first (reserved; rail currently slug-ordered)
 ```
 
 A piece with multiple photos gets a thumbnail strip in the detail view for free

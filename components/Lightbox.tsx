@@ -102,10 +102,18 @@ export default function Lightbox({ piece, onClose }: Props) {
             </p>
           )}
 
+          {piece.materials && (
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-steel-deep">
+                Materials
+              </p>
+              <p className="mt-1 text-sm text-ink/80">{piece.materials}</p>
+            </div>
+          )}
+
           <hr className="border-steel/25" />
           <p className="text-sm text-ink/60">
-            It&apos;s there if it&apos;s there when you come — see it in person
-            at the next event.
+            Come at the next event to get it :)
           </p>
         </div>
       </div>
