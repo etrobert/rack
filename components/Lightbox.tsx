@@ -84,7 +84,6 @@ export default function Lightbox({ piece, onClose }: Props) {
               </p>
             )}
           </div>
-
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs uppercase tracking-wider text-steel-deep">
             {piece.size && <span>Size {piece.size}</span>}
             <span
@@ -95,13 +94,11 @@ export default function Lightbox({ piece, onClose }: Props) {
               {sold ? 'Sold' : 'Available'}
             </span>
           </div>
-
           {piece.blurb && (
             <p className="text-[0.95rem] leading-relaxed text-ink/80">
               {piece.blurb}
             </p>
           )}
-
           {piece.materials && (
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-steel-deep">
@@ -110,7 +107,6 @@ export default function Lightbox({ piece, onClose }: Props) {
               <p className="mt-1 text-sm text-ink/80">{piece.materials}</p>
             </div>
           )}
-
           {piece.source && (
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-steel-deep">
@@ -119,10 +115,11 @@ export default function Lightbox({ piece, onClose }: Props) {
               <p className="mt-1 text-sm text-ink/80">{piece.source}</p>
             </div>
           )}
-
           <hr className="border-steel/25" />
           <p className="text-sm text-ink/60">
-            Come at the next event to get it :)
+            {piece.status === 'available'
+              ? 'Come at the next event to get it :)'
+              : 'It has found a new home :D'}
           </p>
         </div>
       </div>
