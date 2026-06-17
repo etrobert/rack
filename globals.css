@@ -1,0 +1,62 @@
+@import 'tailwindcss';
+
+/*
+  The Rack — visual language derived from the home's own materials, so the
+  screen feels continuous with walking into the flat. Hex values are first-pass
+  placeholders from the home-materials palette; safe to retune visually.
+*/
+@theme {
+  /* Background: warm off-white → beige (the walls). In-situ photos sit on a
+     continuous warm tone, not a white e-commerce void. */
+  --color-paper: #f3ede1;
+  --color-paper-deep: #e8dfcd;
+
+  /* Surfaces / cards: cleaner marble-white for piece cards / detail panels. */
+  --color-marble: #fbfaf6;
+
+  /* Warmth / accents: wood tones (honey → walnut) for dividers, hovers,
+     the wordmark. */
+  --color-honey: #c79a5c;
+  --color-walnut: #6f4a2c;
+
+  /* Precision details: a cool steel grey for thin rules, small meta text,
+     and the price swing-tag "hardware" — the one crisp note against the warmth. */
+  --color-steel: #8b9199;
+  --color-steel-deep: #5f656d;
+
+  /* Ink: soft near-black, never pure black. */
+  --color-ink: #2a2622;
+
+  --font-display: 'Fraunces Variable', Georgia, serif;
+  --font-body: 'Hanken Grotesk Variable', system-ui, sans-serif;
+
+  --animate-rise-in: rise-in 200ms ease-out;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+html {
+  /* Restrained texture: a faint warm grain at most; photos lead. */
+  background-color: var(--color-paper);
+  background-image: radial-gradient(
+    140% 120% at 50% 0%,
+    var(--color-paper) 0%,
+    var(--color-paper-deep) 100%
+  );
+  background-attachment: fixed;
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
