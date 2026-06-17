@@ -31,5 +31,8 @@ blurb  = ""
 EOF
 
 "${EDITOR:-vi}" "$stage/info.toml"
-rsync -a "$stage/" "$dest/"
+# Don't preserve perms: mktemp -d makes the stage dir 0700, which would copy a
+# private (un-servable) mode to the destination. --no-perms lets tower's umask
+# (0022 → 0755/0644) decide, matching how the files server is set up.
+rsync -a --no-perms "$stage/" "$dest/"
 echo "Pushed $n photo(s) → $dest/ (live on next render)"

@@ -13,11 +13,11 @@ I've decided to host an event to do just that.
   // The next event. Date locked by 26 June (18 vs 19 July 2026); placeholder
   // until then — update this line and rebuild.
   nextEvent: {
-    name: 'Birthday / CSD Edition',
+    name: '30th Birthday / CSD Edition',
     // Human-readable; intentionally not a parsed Date — one source of truth.
     date: 'Saturday 18 July 2026',
     blurb:
-      'An afternoon of trying things on, styling, and champagne — at the flat.',
+      'A week before Christopher Street Day, come by for my 30th birthday and get yourself sick new fit!',
   },
 
   // The single call to action: come see it in person. DM to get on the list.
