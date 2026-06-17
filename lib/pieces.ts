@@ -32,6 +32,7 @@ export interface Piece {
   status: Status;
   blurb?: string;
   materials?: string;
+  source?: string;
   /** Card-sized resize of the lead photo; undefined if the piece has no photos. */
   cover?: string;
   /** Detail-sized resizes of every photo, lead first. */
@@ -49,6 +50,7 @@ const PieceInfoSchema = z.object({
   status: z.string().optional(),
   blurb: z.string().optional(),
   materials: z.string().optional(),
+  source: z.string().optional(),
   /** Optional explicit lead photo filename; otherwise the first image wins. */
   cover: z.string().optional(),
   /** Optional sort key; lower sorts first. Falls back to slug order. */
@@ -118,6 +120,7 @@ async function fetchPiece(slug: string): Promise<Piece> {
     status: normalizeStatus(info.status),
     blurb: info.blurb,
     materials: info.materials,
+    source: info.source,
     cover: ordered.length
       ? imgproxyUrl(fileUrl(ordered[0]), CARD_WIDTH)
       : undefined,

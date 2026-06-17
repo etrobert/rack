@@ -111,6 +111,15 @@ export default function Lightbox({ piece, onClose }: Props) {
             </div>
           )}
 
+          {piece.source && (
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-steel-deep">
+                Source
+              </p>
+              <p className="mt-1 text-sm text-ink/80">{piece.source}</p>
+            </div>
+          )}
+
           <hr className="border-steel/25" />
           <p className="text-sm text-ink/60">
             Come at the next event to get it :)

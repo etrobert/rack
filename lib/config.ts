@@ -5,14 +5,15 @@ export const SITE = {
   wordmark: 'The Rack',
   about: `
 I love having my friends over to try on clothes.
-When they come home with one it's even better.
-I've decided to host a regular event to do just that.
+Clothes that I made, found or transformed.
+When they come home with them it's even better.
+I've decided to host an event to do just that.
 `,
 
   // The next event. Date locked by 26 June (18 vs 19 July 2026); placeholder
   // until then — update this line and rebuild.
   nextEvent: {
-    name: 'The Rack — Birthday / CSD Edition',
+    name: 'Birthday / CSD Edition',
     // Human-readable; intentionally not a parsed Date — one source of truth.
     date: 'Saturday 18 July 2026',
     blurb:
