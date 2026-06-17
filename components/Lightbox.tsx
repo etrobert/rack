@@ -78,9 +78,9 @@ export default function Lightbox({ piece, onClose }: Props) {
         <div className="grid content-start gap-4 p-6 sm:p-8">
           <div className="flex items-start justify-between gap-3">
             <h2 className="font-display text-2xl text-ink">{piece.name}</h2>
-            {piece.price && (
+            {piece.price != null && (
               <p className="shrink-0 font-display text-2xl text-ink">
-                {piece.price}
+                €{piece.price}
               </p>
             )}
           </div>

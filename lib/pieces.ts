@@ -28,8 +28,9 @@ export interface Piece {
   slug: string;
   name: string;
   size?: string;
-  price?: string;
   status: Status;
+  /** Euros. Rendered with a € prefix at the call site. */
+  price?: number;
   blurb?: string;
   materials?: string;
   source?: string;
@@ -42,11 +43,12 @@ export interface Piece {
 // info.toml is hand-edited over SSH, so validate it at runtime rather than
 // trusting a cast. Every field is optional — a piece with a half-written sidecar
 // still renders what it has (downstream fills the gaps). A wrong *type*
-// (e.g. price written as a number) fails parsing and the piece is skipped.
+// (e.g. price written as a string `"€35"` instead of the number `35`) fails
+// parsing and the piece is skipped.
 const PieceInfoSchema = z.object({
   name: z.string().optional(),
   size: z.string().optional(),
-  price: z.string().optional(),
+  price: z.number().optional(),
   status: z.string().optional(),
   blurb: z.string().optional(),
   materials: z.string().optional(),
@@ -76,7 +78,10 @@ function imgproxyUrl(fileUrl: string, width: number): string {
 }
 
 async function listDir(url: string): Promise<CaddyItem[]> {
-  const res = await fetch(url, { headers: { Accept: 'application/json' } });
+  const res = await fetch(url, {
+    headers: { Accept: 'application/json' },
+    cache: 'no-store',
+  });
   if (!res.ok) throw new Error(`Failed to list ${url}: ${res.status}`);
   return res.json();
 }
@@ -86,7 +91,9 @@ function normalizeStatus(raw: string | undefined): Status {
 }
 
 async function fetchPieceInfo(slug: string): Promise<PieceInfo> {
-  const res = await fetch(`${BASE_URL}${encodeURIComponent(slug)}/info.toml`);
+  const res = await fetch(`${BASE_URL}${encodeURIComponent(slug)}/info.toml`, {
+    cache: 'no-store',
+  });
   if (!res.ok)
     throw new Error(`Missing info.toml for "${slug}": ${res.status}`);
   return PieceInfoSchema.parse(parse(await res.text()));

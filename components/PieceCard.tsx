@@ -49,9 +49,9 @@ export default function PieceCard({ piece, onOpen }: Props) {
                 </p>
               )}
             </div>
-            {piece.price && (
+            {piece.price != null && (
               <p className="shrink-0 font-display text-lg leading-tight text-ink">
-                {piece.price}
+                €{piece.price}
               </p>
             )}
           </div>

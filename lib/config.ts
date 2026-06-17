@@ -22,7 +22,7 @@ I've decided to host an event to do just that.
 
   // The single call to action: come see it in person. DM to get on the list.
   dm: {
-    label: 'DM me',
+    label: 'DM',
     href: 'https://instagram.com/thesoft.emperor',
   },
 } as const;
