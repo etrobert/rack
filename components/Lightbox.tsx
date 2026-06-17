@@ -41,7 +41,7 @@ export default function Lightbox({ piece, onClose }: Props) {
         className="absolute inset-0 cursor-zoom-out bg-ink/70 backdrop-blur-sm"
       />
 
-      <div className="relative grid max-h-full w-full max-w-4xl animate-rise-in overflow-hidden rounded-xl bg-marble shadow-2xl md:grid-cols-[1.4fr_1fr]">
+      <div className="relative grid max-h-full w-full max-w-4xl animate-rise-in overflow-y-auto rounded-xl bg-marble shadow-2xl md:grid-cols-[1.4fr_1fr]">
         <div className="flex flex-col bg-paper-deep/40">
           {piece.photos[active] && (
             <img
