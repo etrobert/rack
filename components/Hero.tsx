@@ -1,16 +1,22 @@
 import { SITE } from '../lib/config';
 
-// The hero carries the wordmark, the parti-pris in one line, and the single
-// call to action: the next event's date + a DM link. No payments, no accounts.
+// The hero leads with the parti-pris — that one line is what draws people in —
+// and carries the wordmark as a quiet label, plus the single call to action:
+// the next event's date + a DM link. No payments, no accounts.
 export default function Hero() {
   const { name, date, blurb } = SITE.nextEvent;
+  // The opening line is the hook; the rest is supporting context.
+  const [lead, ...rest] = SITE.about.trim().split('\n');
   return (
     <header className="px-6 pt-8 pb-12 text-center sm:pt-12 sm:pb-16 lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-center lg:px-10 lg:py-12">
-      <h1 className="font-display text-5xl font-semibold tracking-tight text-walnut sm:text-7xl">
+      <p className="text-base font-semibold uppercase tracking-[0.22em] text-steel-deep">
         {SITE.wordmark}
+      </p>
+      <h1 className="mx-auto mt-3 max-w-prose font-display text-xl font-semibold leading-tight tracking-tight text-walnut sm:text-2xl">
+        {lead}
       </h1>
       <p className="mx-auto mt-4 max-w-prose whitespace-pre-line text-base leading-relaxed text-ink/70">
-        {SITE.about.trim()}
+        {rest.join('\n')}
       </p>
 
       <div className="mx-auto mt-10 max-w-md rounded-lg border border-steel/30 bg-marble/70 px-6 py-5">
