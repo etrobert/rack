@@ -20,6 +20,8 @@ interface CaddyItem {
   name: string;
   is_dir: boolean;
   url: string;
+  /** RFC 3339 timestamp; nanosecond precision, truncated to ms by Date.parse. */
+  mod_time: string;
 }
 
 export type Status = 'available' | 'sold';
@@ -38,6 +40,8 @@ export interface Piece {
   cover?: string;
   /** Detail-sized resizes of every photo, lead first. */
   photos: string[];
+  /** Folder mod time (epoch ms); drives most-recent-first ordering of the rail. */
+  updatedAt: number;
 }
 
 // info.toml is hand-edited over SSH, so validate it at runtime rather than
@@ -55,8 +59,6 @@ const PieceInfoSchema = z.object({
   source: z.string().optional(),
   /** Optional explicit lead photo filename; otherwise the first image wins. */
   cover: z.string().optional(),
-  /** Optional sort key; lower sorts first. Falls back to slug order. */
-  order: z.number().optional(),
 });
 type PieceInfo = z.infer<typeof PieceInfoSchema>;
 
@@ -94,7 +96,7 @@ async function fetchPieceInfo(slug: string): Promise<PieceInfo> {
   return PieceInfoSchema.parse(parse(await res.text()));
 }
 
-async function fetchPiece(slug: string): Promise<Piece> {
+async function fetchPiece(slug: string, updatedAt: number): Promise<Piece> {
   const items = await listDir(`${BASE_URL}${encodeURIComponent(slug)}/`);
   const info = await fetchPieceInfo(slug);
 
@@ -127,14 +129,17 @@ async function fetchPiece(slug: string): Promise<Piece> {
       ? imgproxyUrl(fileUrl(ordered[0]), CARD_WIDTH)
       : undefined,
     photos: ordered.map((name) => imgproxyUrl(fileUrl(name), DETAIL_WIDTH)),
+    updatedAt,
   };
 }
 
 export async function getPieces(): Promise<Piece[]> {
   const items = await listDir(BASE_URL);
-  const slugs = items.filter((i) => i.is_dir).map((i) => dirSlug(i.name));
+  const dirs = items.filter((i) => i.is_dir);
 
-  const settled = await Promise.allSettled(slugs.map(fetchPiece));
+  const settled = await Promise.allSettled(
+    dirs.map((dir) => fetchPiece(dirSlug(dir.name), Date.parse(dir.mod_time))),
+  );
   const pieces: Piece[] = [];
   for (const result of settled) {
     // A malformed piece (missing info.toml, etc.) shouldn't blank the whole
@@ -142,5 +147,9 @@ export async function getPieces(): Promise<Piece[]> {
     if (result.status === 'fulfilled') pieces.push(result.value);
     else console.warn('Skipping piece:', result.reason);
   }
+  // Most recently added / re-shot pieces lead the rail. Folder mod time tracks
+  // file adds/removes, not info.toml edits — so marking a piece sold doesn't
+  // resurface it.
+  pieces.sort((a, b) => b.updatedAt - a.updatedAt);
   return pieces;
 }
