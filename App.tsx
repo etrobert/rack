@@ -16,7 +16,7 @@ export default function App() {
     <div className="lg:grid lg:min-h-screen lg:grid-cols-[40rem_1fr]">
       <Hero />
 
-      <main className="px-4 pb-24 sm:px-6 lg:pt-10">
+      <main className="px-4 pb-4 sm:px-6 lg:pb-10 lg:pt-10">
         {isPending && (
           <p className="py-16 text-center text-sm text-steel-deep">
             Wheeling out the rack…
