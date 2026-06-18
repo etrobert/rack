@@ -45,14 +45,10 @@
 }
 
 html {
-  /* Restrained texture: a faint warm grain at most; photos lead. */
+  /* One continuous wall tone behind everything — a single flat beige so the
+     mobile overscroll / browser-UI regions match the page (a gradient here
+     leaves a seam where it meets the flat canvas color). Photos lead. */
   background-color: var(--color-paper);
-  background-image: radial-gradient(
-    140% 120% at 50% 0%,
-    var(--color-paper) 0%,
-    var(--color-paper-deep) 100%
-  );
-  background-attachment: fixed;
   color: var(--color-ink);
 }
 
