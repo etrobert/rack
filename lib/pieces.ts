@@ -26,6 +26,12 @@ interface CaddyItem {
 
 export type Status = 'available' | 'sold';
 
+// How much of my hands are in the piece. `found` is the default for a
+// secondhand catalog, so it carries no card badge — only the hands-on
+// provenances (handmade, modified) get surfaced on the rail.
+const ProvenanceSchema = z.enum(['handmade', 'modified', 'found']);
+export type Provenance = z.infer<typeof ProvenanceSchema>;
+
 export interface Piece {
   slug: string;
   name: string;
@@ -36,6 +42,7 @@ export interface Piece {
   blurb?: string;
   materials?: string;
   source?: string;
+  provenance: Provenance;
   /** Card-sized resize of the lead photo; undefined if the piece has no photos. */
   cover?: string;
   /** Detail-sized resizes of every photo, lead first. */
@@ -57,6 +64,8 @@ const PieceInfoSchema = z.object({
   blurb: z.string().optional(),
   materials: z.string().optional(),
   source: z.string().optional(),
+  /** Omit for found pieces; an unknown value fails parsing and skips the piece. */
+  provenance: ProvenanceSchema.optional(),
   /** Optional explicit lead photo filename; otherwise the first image wins. */
   cover: z.string().optional(),
 });
@@ -125,6 +134,7 @@ async function fetchPiece(slug: string, updatedAt: number): Promise<Piece> {
     blurb: info.blurb,
     materials: info.materials,
     source: info.source,
+    provenance: info.provenance ?? 'found',
     cover: ordered.length
       ? imgproxyUrl(fileUrl(ordered[0]), CARD_WIDTH)
       : undefined,

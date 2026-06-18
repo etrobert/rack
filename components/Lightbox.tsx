@@ -93,6 +93,9 @@ export default function Lightbox({ piece, onClose }: Props) {
             >
               {sold ? 'Sold' : 'Available'}
             </span>
+            {piece.provenance !== 'found' && (
+              <span className="capitalize">{piece.provenance}</span>
+            )}
           </div>
           {piece.blurb && (
             <p className="text-[0.95rem] leading-relaxed text-ink/80">

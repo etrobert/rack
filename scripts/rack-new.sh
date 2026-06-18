@@ -26,8 +26,9 @@ size   = ""
 price  = ""
 status = "available"
 blurb  = ""
-# materials = ""
-# source    = ""
+# materials  = ""
+# source     = ""
+# provenance = "handmade"  # or "modified"; omit for found pieces
 EOF
 
 "${EDITOR:-vi}" "$stage/info.toml"

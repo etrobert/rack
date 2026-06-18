@@ -10,6 +10,8 @@ type Props = {
 // visible, dimmed and marked.
 export default function PieceCard({ piece, onOpen }: Props) {
   const sold = piece.status === 'sold';
+  // `found` is the catalog default, so only the hands-on provenances earn a badge.
+  const showProvenance = piece.provenance !== 'found';
   return (
     <button
       type="button"
@@ -30,11 +32,18 @@ export default function PieceCard({ piece, onOpen }: Props) {
               }`}
             />
           )}
-          {sold && (
-            <span className="absolute left-3 top-3 rounded-full bg-ink/85 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-paper">
-              Sold
-            </span>
-          )}
+          <div className="absolute bottom-3 left-3 flex flex-wrap gap-2">
+            {sold && (
+              <span className="rounded-full bg-ink/85 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-paper">
+                Sold
+              </span>
+            )}
+            {showProvenance && (
+              <span className="rounded-full bg-walnut/90 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-paper">
+                {piece.provenance}
+              </span>
+            )}
+          </div>
         </div>
 
         <figcaption className="grid gap-2 p-4">
