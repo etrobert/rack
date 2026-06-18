@@ -6,7 +6,7 @@ export const SITE = {
   about: `
 I love having my friends over to try on clothes.
 Clothes that I made, found or transformed.
-When they come home with them it's even better.
+When they take one home, it's even better.
 I've decided to host an event to do just that.
 `,
 
