@@ -55,6 +55,42 @@ nix run .#rack-new -- linen-shirt ~/shoot/linen-shirt/*.jpg
 Destination defaults to `tower:/srv/files/rack`; override with `RACK_HOST` /
 `RACK_PATH`. The dev shell (`nix develop`) puts `rack-new` on `$PATH` directly.
 
+### Bulk add from a photo dump (Claude-driven)
+
+When a whole shoot lands in one folder with several pieces mixed together,
+`rack-new` (one slug per call) is slow and you'd have to pre-sort the photos.
+Instead, hand the folder to Claude Code and let it do the grouping by **looking**
+at the photos. Run it straight on tower (the rack dir is local there, so no
+rsync). The flow we use:
+
+1. **Point Claude at the folder**, e.g. _"add the pieces in `~/sync/Rack
+photos`"_. Claude lists the images.
+2. **Convert HEIC → JPG first.** iPhone shoots `.HEIC`, but `lib/pieces.ts` only
+   recognizes `jpg/jpeg/png/webp/avif` — a `.heic` piece renders **photoless**.
+   Convert with libheif: `nix shell nixpkgs#libheif -c heif-dec --quality 92
+in.HEIC out.jpg`.
+3. **Claude views every photo and groups them** into pieces (which shots are the
+   same garment), best-effort including stray/ambiguous frames and flagging the
+   uncertain ones. For each piece it picks the **best cover** and a display
+   **name** only — it invents no other field.
+4. **Dedupe against what's already live** — visually, not just by slug. Compare
+   each candidate against the existing pieces' photos; skip anything that's the
+   same garment (and skip slug collisions), leaving those source files in place.
+5. **Stage each new piece** directly under `/srv/files/rack/<slug>/`: photos
+   copied in as `01.<ext>`, `02.<ext>`, … (cover first) + an `info.toml` with
+   only `name` set and every other field **commented out** (see schema below).
+6. **Delete the source photos** only once they're placed; keep the originals of
+   anything skipped (duplicate / collision).
+7. **Verify + report.** Check the served listing and a couple of imgproxy cover
+   renders return `200`; new folders lead the rail automatically (mod-time
+   order). Claude finishes with a short summary of pieces, covers, flags, and
+   skips.
+
+Pieces are staged name-only on purpose; you fill `price`, `size`, `blurb`, etc.
+afterward by editing each `info.toml` (live instantly). **Claude must not
+overwrite a field you've already set** — when re-running or renaming, it only
+touches `name`/`price`/… if they still match the value it originally wrote.
+
 ### `info.toml` schema
 
 ```toml
