@@ -6,7 +6,7 @@ type Props = {
   onClose: () => void;
 };
 
-// Detail view: photo(s) + name / size / price / status / blurb. A gentle
+// Detail view: photo(s) + name / size / status / blurb. A gentle
 // fade+scale on open; no clever animations to misread or break. Multi-photo
 // pieces (the phase-2 idea) get a thumbnail strip for free.
 export default function Lightbox({ piece, onClose }: Props) {
@@ -78,11 +78,6 @@ export default function Lightbox({ piece, onClose }: Props) {
         <div className="grid content-start gap-4 p-6 sm:p-8">
           <div className="flex items-start justify-between gap-3">
             <h2 className="font-display text-2xl text-ink">{piece.name}</h2>
-            {piece.price != null && (
-              <p className="shrink-0 font-display text-2xl text-ink">
-                €{piece.price}
-              </p>
-            )}
           </div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs uppercase tracking-wider text-steel-deep">
             {piece.size && <span>Size {piece.size}</span>}

@@ -5,7 +5,7 @@ type Props = {
   onOpen: () => void;
 };
 
-// One piece on the rail: in-situ photo leads, with name, size, price, sold
+// One piece on the rail: in-situ photo leads, with name, size, sold
 // status, and the one-line POV blurb (the curation voice). Sold pieces stay
 // visible, dimmed and marked.
 export default function PieceCard({ piece, onOpen }: Props) {
@@ -58,11 +58,6 @@ export default function PieceCard({ piece, onOpen }: Props) {
                 </p>
               )}
             </div>
-            {piece.price != null && (
-              <p className="shrink-0 font-display text-lg leading-tight text-ink">
-                €{piece.price}
-              </p>
-            )}
           </div>
           {piece.blurb && (
             <p className="text-sm leading-snug text-ink/70">{piece.blurb}</p>
